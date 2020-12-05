@@ -1,29 +1,29 @@
 #include "eng.hpp"
 
 
-
-void Eng::init(){};
+void Eng::init(){
+	for (int i = 0; i < 100; ++i) {
+		double x = static_cast <double> (rand()) / static_cast <double> (RAND_MAX);
+		double y = static_cast <double> (rand()) / static_cast <double> (RAND_MAX);
+		objects.push_back(Object(Geom::Pos(80.0+x, 45.0+y), 1.0));
+	}
+};
 
 void Eng::cleanup(){};
 
 void Eng::events(){
-	Geom::Pos move;
-	float speed = 50.0;
-	float frameTime = getFrameTime();
-	float displacement = speed*frameTime;
-	const Uint8* keyboard = getKeyboard();
-	if(keyboard[SDL_SCANCODE_LEFT])
-		move += Geom::Pos(-displacement,  0.0);
-	if(keyboard[SDL_SCANCODE_RIGHT])
-		move += Geom::Pos( displacement,  0.0);
-	if(keyboard[SDL_SCANCODE_UP])
-		move += Geom::Pos( 0.0, -displacement);
-	if(keyboard[SDL_SCANCODE_DOWN])
-		move += Geom::Pos( 0.0,  displacement);
-	object.displace(move);
+	double frameTime = getFrameTime();
+	for (Object & object : objects) {
+		object.computeForce(objects, frameTime, 40.0);
+	}
+	for (Object & object : objects) {
+		object.sim(frameTime, 10.0);
+	}
 };
 
 void Eng::draw(){
-	setColor(Geom::Color(100, 100, 100));
-	drawDot(object.getPos());
+	setColor(Geom::Color(255, 255, 255));
+	for (Object const& object : objects) {
+		drawDot(object.getPos());
+	}
 };

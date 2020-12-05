@@ -129,6 +129,6 @@ void Fx::setColor(const Geom::Color & color) const{
 
 void Fx::drawDot(const Geom::Pos & a) const{
 	Geom::Pos aScaled = a*scale;
-	SDL_RenderDrawPoint(renderer, aScaled.x, aScaled.y);
+	SDL_RenderDrawPoint(renderer, aScaled.x, windowSize.y-aScaled.y);
 };
 

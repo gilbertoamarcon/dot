@@ -4,11 +4,15 @@
 #include "geom.hpp"
 #include "fx.hpp"
 #include "object.hpp"
+#include <vector>
+#include <stdlib.h>
 
 class Eng : public Fx {
 
 private:
-	Object object;
+	std::vector<Object> objects;
+	Object a;
+	Object b;
 
 public:
 	void init();
