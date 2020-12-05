@@ -1,0 +1,13 @@
+fullscreen: True
+inputGrabbed: False
+windowTitle: ""
+window:
+  w: 1120
+  h: 630
+world:
+  w: 160
+  h: 90
+canvasColor:
+  r: 0
+  g: 0
+  b: 0
